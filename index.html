@@ -12,20 +12,21 @@
       align-items: center;
       background-color: #f3f4f6;
       margin: 0;
-      padding: 20px;
+      padding: 15px;
     }
     
     /* 실제 명함 디자인 영역 */
     .biz-card {
-      background-color: #fcfcf7; /* 명함 배경색 (미색) */
+      background-color: #fcfcf7; 
       width: 100%;
       max-width: 450px;
       border: 1px solid #e5e5e5;
       position: relative;
-      padding: 20px 20px 30px 20px;
+      padding: 20px 15px 25px 15px; /* 모바일에서도 잘리거나 밀리지 않게 여백 조정 */
       box-sizing: border-box;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       margin-bottom: 20px;
+      overflow: hidden;
     }
     
     /* 하단 파란색 띠 */
@@ -35,7 +36,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 15px;
+      height: 12px;
       background-color: #1a5b8e;
     }
 
@@ -45,7 +46,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 15px;
-      height: 40px;
+      height: 35px;
     }
     .card-header img {
       height: 100%;
@@ -55,16 +56,17 @@
     /* 본문 영역 (좌측 사진, 우측 텍스트) */
     .card-body {
       display: flex;
-      gap: 15px;
+      gap: 12px;
+      align-items: flex-start;
     }
 
     /* 좌측 사진 */
     .photo-area {
-      flex: 0 0 110px;
+      flex: 0 0 95px; /* 스마트폰 너비에 맞춰 사진 크기 살짝 축소 */
     }
     .photo-area img {
       width: 100%;
-      height: 140px;
+      height: 125px;
       object-fit: contain;
       border: 1px solid #333;
       background-color: white;
@@ -73,49 +75,53 @@
     /* 우측 정보 */
     .info-area {
       flex: 1;
+      min-width: 0; /* 넘침 방지 */
     }
     .name-box {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .name-box h1 {
-      margin: 0 0 5px 0;
-      font-size: 1.8rem;
-      letter-spacing: 5px;
+      margin: 0 0 3px 0;
+      font-size: 1.5rem;
+      letter-spacing: 3px;
       color: #000;
+      white-space: nowrap !important;
     }
     .name-box p {
       margin: 0;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       color: #333;
+      white-space: nowrap !important;
     }
 
     hr.divider {
       border: 0;
       border-top: 1px solid #666;
-      margin: 10px 0;
+      margin: 8px 0;
     }
 
-    /* 연락처 테이블 정렬 */
+    /* 연락처 테이블 - 🌟 가장 중요한 수정 부분 🌟 */
     .contact-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.8rem;
+      font-size: 0.75rem; /* 좁은 폰에서도 한 줄에 다 들어가도록 글자 크기 조정 */
       color: #333;
     }
     .contact-table th {
       text-align: left;
       font-weight: normal;
-      width: 75px;
+      width: 55px;
       padding: 2px 0;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
+      white-space: nowrap !important; /* 글자가 세로로 찌그러지는 것 강제 방지 */
     }
     .contact-table td {
       padding: 2px 0;
-      white-space: nowrap; /* 추가: 글자가 밑으로 떨어지지 않고 무조건 한 줄로 고정됨 */
-      letter-spacing: -0.5px; /* 추가: 글자 사이 간격을 살짝 좁혀서 영역 안으로 쏙 들어가게 함 */
+      letter-spacing: -0.5px;
+      white-space: nowrap !important; /* 주소가 두 줄로 떨어지는 것 강제 방지 */
     }
 
-    /* 기능 버튼 및 QR 영역 (명함 디자인 외부) */
+    /* 기능 버튼 및 QR 영역 */
     .action-area {
       width: 100%;
       max-width: 450px;
@@ -136,7 +142,8 @@
       font-weight: bold;
       border: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 16px; /* 버튼 글자 크기 완벽 통일 */
+      box-sizing: border-box;
     }
     .btn-save { background: #1a5b8e; color: white; }
     .btn-call { background: #e5e7eb; color: #1f2937; }
@@ -150,23 +157,23 @@
 </head>
 <body>
 
-  <!-- 1. 눈에 보이는 명함 디자인 -->
+  <!-- 1. 명함 디자인 영역 -->
   <div class="biz-card">
     <div class="card-header">
-      <!-- 시청 로고 이미지가 들어갈 자리 -->
-      <img src="logo.jpg" alt="평택시 로고">
-      <img src="slo.jpg" alt="슬로건 로고">
+      <!-- 시청 로고 이미지가 들어갈 자리 (src 주소 변경 필요) -->
+      <img src="https://via.placeholder.com/100x35?text=Pyeongtaek+Logo" alt="평택시 로고" style="opacity:0.5;">
+      <img src="https://via.placeholder.com/100x35?text=Slogan+Logo" alt="슬로건 로고" style="opacity:0.5;">
     </div>
     
     <div class="card-body">
       <div class="photo-area">
-        <!-- 평택이(프로필) 이미지가 들어갈 자리 -->
-        <img src="pyeongtaeke.jpg" alt="프로필 사진" id="cardPhoto">
+        <!-- 평택이(프로필) 이미지가 들어갈 자리 (src 주소 변경 필요) -->
+        <img src="https://via.placeholder.com/95x125?text=Photo" alt="프로필 사진" id="cardPhoto">
       </div>
       <div class="info-area">
         <div class="name-box">
-          <h1 id="cardName">평 택 이</h1>
-          <p id="cardRole">정보통신과 주무관</p>
+          <h1 id="cardName">김 지 은</h1>
+          <p id="cardRole">기획예산과 주무관</p>
         </div>
         <hr class="divider">
         <table class="contact-table">
@@ -180,7 +187,7 @@
     </div>
   </div>
 
-  <!-- 2. 기능 조작 버튼 (디자인 손상을 막기 위해 명함 바깥으로 분리) -->
+  <!-- 2. 하단 조작 버튼 영역 -->
   <div class="action-area">
     <button class="btn btn-save" onclick="saveContact()">연락처 자동 저장</button>
     <a href="#" id="linkCall" class="btn btn-call">전화 걸기</a>
@@ -189,21 +196,18 @@
   </div>
 
   <script>
-    // URL 쿼리 파라미터 값 가져오기
     const params = new URLSearchParams(window.location.search);
     
-    // 기본값 설정 (파라미터가 없을 때 표시됨)
     const userData = {
-      name: params.get('name') || '평 택 이',
-      role: params.get('role') || '정보통신과 주무관',
+      name: params.get('name') || '김 지 은',
+      role: params.get('role') || '기획예산과 주무관',
       address: params.get('address') || '경기도 평택시 경기대로 245(비전동)',
       office: params.get('office') || '031-8024-0000',
       fax: params.get('fax') || '031-8024-0001',
       tel: params.get('tel') || '010-0000-0000',
-      email: params.get('email') || 'ptcity5000@korea.kr'
+      email: params.get('email') || 'jieun@korea.kr'
     };
 
-    // 텍스트 반영
     document.getElementById('cardName').textContent = userData.name;
     document.getElementById('cardRole').textContent = userData.role;
     document.getElementById('cardAddress').textContent = userData.address;
@@ -213,11 +217,9 @@
     document.getElementById('cardEmail').textContent = userData.email;
     document.getElementById('linkCall').href = `tel:${userData.tel.replace(/[^0-9]/g, '')}`;
 
-    // QR 코드 생성
     const currentUrl = encodeURIComponent(window.location.href);
     document.getElementById('qrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${currentUrl}`;
 
-    // vCard 생성
     function saveContact() {
       const vcard = 
 `BEGIN:VCARD
