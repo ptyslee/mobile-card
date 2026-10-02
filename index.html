@@ -161,19 +161,19 @@
   <div class="biz-card">
     <div class="card-header">
       <!-- 시청 로고 이미지가 들어갈 자리 (src 주소 변경 필요) -->
-      <img src="https://via.placeholder.com/100x35?text=Pyeongtaek+Logo" alt="평택시 로고" style="opacity:0.5;">
-      <img src="https://via.placeholder.com/100x35?text=Slogan+Logo" alt="슬로건 로고" style="opacity:0.5;">
+      <img src="logo.jpg" alt="평택시 로고" style="opacity:0.5;">
+      <img src="slo.jpg" alt="슬로건 로고" style="opacity:0.5;">
     </div>
     
     <div class="card-body">
       <div class="photo-area">
         <!-- 평택이(프로필) 이미지가 들어갈 자리 (src 주소 변경 필요) -->
-        <img src="https://via.placeholder.com/95x125?text=Photo" alt="프로필 사진" id="cardPhoto">
+        <img src="pyeongtaeke.jpg" alt="프로필 사진" id="cardPhoto">
       </div>
       <div class="info-area">
         <div class="name-box">
-          <h1 id="cardName">김 지 은</h1>
-          <p id="cardRole">기획예산과 주무관</p>
+          <h1 id="cardName">평 택 이</h1>
+          <p id="cardRole">정보통신과 주무관</p>
         </div>
         <hr class="divider">
         <table class="contact-table">
@@ -199,8 +199,8 @@
     const params = new URLSearchParams(window.location.search);
     
     const userData = {
-      name: params.get('name') || '김 지 은',
-      role: params.get('role') || '기획예산과 주무관',
+      name: params.get('name') || '평 택 이',
+      role: params.get('role') || '정보통신과 주무관',
       address: params.get('address') || '경기도 평택시 경기대로 245(비전동)',
       office: params.get('office') || '031-8024-0000',
       fax: params.get('fax') || '031-8024-0001',
