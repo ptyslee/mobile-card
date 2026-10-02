@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모바일 명함</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f3f4f6; }
+    .card { background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 300px; text-align: center; }
+    .name { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.25rem; }
+    .role { color: #6b7280; font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .btn { display: block; width: 100%; padding: 0.75rem 0; margin-bottom: 0.75rem; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; border: none; cursor: pointer; }
+    .btn-save { background: #2563eb; color: white; }
+    .btn-call { background: #f3f4f6; color: #1f2937; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="name">홍길동</div>
+    <div class="role">기획예산과 · 주무관</div>
+    
+    <button class="btn btn-save" onclick="saveContact()">연락처 저장</button>
+    <a href="tel:01012345678" class="btn btn-call">전화 걸기</a>
+  </div>
+
+  <script>
+    function saveContact() {
+      // vCard 3.0 국제 표준 규격 텍스트
+      const vcard = 
+`BEGIN:VCARD
+VERSION:3.0
+N:홍;길동;;;
+FN:홍길동
+ORG:지방자치단체;기획예산과
+TITLE:주무관
+TEL;TYPE=CELL:010-1234-5678
+EMAIL:test@example.go.kr
+END:VCARD`;
+
+      const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const newLink = document.createElement('a');
+      newLink.download = '홍길동_명함.vcf';
+      newLink.href = url;
+      newLink.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
