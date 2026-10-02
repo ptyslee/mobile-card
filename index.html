@@ -3,157 +3,229 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모바일 명함</title>
+  <title>평택시 모바일 명함</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      margin: 0;
       background-color: #f3f4f6;
+      margin: 0;
+      padding: 20px;
     }
-    .card {
-      background: white;
-      padding: 2.2rem 1.8rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      width: 320px;
-      text-align: center;
+    
+    /* 실제 명함 디자인 영역 */
+    .biz-card {
+      background-color: #fcfcf7; /* 명함 배경색 (미색) */
+      width: 100%;
+      max-width: 450px;
+      border: 1px solid #e5e5e5;
+      position: relative;
+      padding: 20px 20px 30px 20px;
       box-sizing: border-box;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
     }
-    .org {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #2563eb;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
+    
+    /* 하단 파란색 띠 */
+    .biz-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 15px;
+      background-color: #1a5b8e;
     }
-    .name {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #111827;
-      margin-bottom: 0.3rem;
+
+    /* 상단 로고 영역 */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      height: 40px;
     }
-    .role {
-      color: #4b5563;
+    .card-header img {
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* 본문 영역 (좌측 사진, 우측 텍스트) */
+    .card-body {
+      display: flex;
+      gap: 15px;
+    }
+
+    /* 좌측 사진 */
+    .photo-area {
+      flex: 0 0 110px;
+    }
+    .photo-area img {
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      border: 1px solid #333;
+      background-color: white;
+    }
+
+    /* 우측 정보 */
+    .info-area {
+      flex: 1;
+    }
+    .name-box {
+      margin-bottom: 10px;
+    }
+    .name-box h1 {
+      margin: 0 0 5px 0;
+      font-size: 1.8rem;
+      letter-spacing: 5px;
+      color: #000;
+    }
+    .name-box p {
+      margin: 0;
       font-size: 0.95rem;
-      margin-bottom: 1.8rem;
+      color: #333;
     }
-    .info-list {
+
+    hr.divider {
+      border: 0;
+      border-top: 1px solid #666;
+      margin: 10px 0;
+    }
+
+    /* 연락처 테이블 정렬 */
+    .contact-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      color: #333;
+    }
+    .contact-table th {
       text-align: left;
-      background: #f9fafb;
-      padding: 0.9rem 1rem;
+      font-weight: normal;
+      width: 55px;
+      padding: 2px 0;
+      letter-spacing: 2px;
+    }
+    .contact-table td {
+      padding: 2px 0;
+    }
+
+    /* 기능 버튼 및 QR 영역 (명함 디자인 외부) */
+    .action-area {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      padding: 20px;
       border-radius: 12px;
-      margin-bottom: 1.5rem;
-      font-size: 0.88rem;
-      color: #374151;
-      line-height: 1.6;
+      box-sizing: border-box;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      text-align: center;
     }
     .btn {
       display: block;
       width: 100%;
-      padding: 0.85rem 0;
-      margin-bottom: 0.75rem;
-      border-radius: 10px;
+      padding: 12px 0;
+      margin-bottom: 10px;
+      border-radius: 8px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-align: center;
+      font-weight: bold;
       border: none;
       cursor: pointer;
-      box-sizing: border-box;
-      transition: background-color 0.2s;
     }
-    .btn-save {
-      background: #2563eb;
-      color: white;
-    }
-    .btn-save:active {
-      background: #1d4ed8;
-    }
-    .btn-call {
-      background: #e5e7eb;
-      color: #1f2937;
-    }
-    .btn-call:active {
-      background: #d1d5db;
-    }
-    .qr-box {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px dashed #e5e7eb;
-    }
-    .qr-title {
-      font-size: 0.8rem;
-      color: #6b7280;
-      margin-bottom: 0.8rem;
-    }
+    .btn-save { background: #1a5b8e; color: white; }
+    .btn-call { background: #e5e7eb; color: #1f2937; }
+    
     .qr-image {
+      margin-top: 15px;
       width: 120px;
       height: 120px;
-      border-radius: 8px;
-      border: 1px solid #e5e7eb;
-      padding: 5px;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="org" id="cardOrg">소속 기관</div>
-    <div class="name" id="cardName">이름</div>
-    <div class="role" id="cardRole">직함</div>
 
-    <div class="info-list">
-      <div>📞 <span id="textTel">-</span></div>
-      <div>✉️ <span id="textEmail">-</span></div>
+  <!-- 1. 눈에 보이는 명함 디자인 -->
+  <div class="biz-card">
+    <div class="card-header">
+      <!-- 시청 로고 이미지가 들어갈 자리 -->
+      <img src="https://via.placeholder.com/120x40?text=Pyeongtaek+Logo" alt="평택시 로고" style="opacity:0.5;">
+      <img src="https://via.placeholder.com/120x40?text=Slogan+Logo" alt="슬로건 로고" style="opacity:0.5;">
     </div>
     
-    <button class="btn btn-save" onclick="saveContact()">연락처 저장</button>
-    <a href="#" id="linkCall" class="btn btn-call">전화 걸기</a>
-
-    <!-- QR 코드 영역 추가 -->
-    <div class="qr-box">
-      <div class="qr-title">카메라로 스캔하여 명함 저장</div>
-      <img id="qrCodeImg" class="qr-image" src="" alt="QR Code">
+    <div class="card-body">
+      <div class="photo-area">
+        <!-- 평택이(프로필) 이미지가 들어갈 자리 -->
+        <img src="https://via.placeholder.com/110x140?text=Photo" alt="프로필 사진" id="cardPhoto">
+      </div>
+      <div class="info-area">
+        <div class="name-box">
+          <h1 id="cardName">김 지 은</h1>
+          <p id="cardRole">기획예산과 주무관</p>
+        </div>
+        <hr class="divider">
+        <table class="contact-table">
+          <tr><th>주 소</th><td id="cardAddress">경기도 평택시 경기대로 245(비전동)</td></tr>
+          <tr><th>사무실</th><td id="cardOffice">031-8024-0000</td></tr>
+          <tr><th>팩 스</th><td id="cardFax">031-8024-0001</td></tr>
+          <tr><th>전화번호</th><td id="cardTel">010-0000-0000</td></tr>
+          <tr><th>이 메 일</th><td id="cardEmail">jieun@korea.kr</td></tr>
+        </table>
+      </div>
     </div>
   </div>
 
-  <script>
-    // 1. 주소창(URL)의 쿼리 파라미터 읽어오기
-    const params = new URLSearchParams(window.location.search);
+  <!-- 2. 기능 조작 버튼 (디자인 손상을 막기 위해 명함 바깥으로 분리) -->
+  <div class="action-area">
+    <button class="btn btn-save" onclick="saveContact()">연락처 자동 저장</button>
+    <a href="#" id="linkCall" class="btn btn-call">전화 걸기</a>
+    <p style="font-size:0.8rem; color:#666; margin-top:20px;">▼ 카메라로 스캔하여 명함 저장 ▼</p>
+    <img id="qrCodeImg" class="qr-image" src="" alt="QR Code">
+  </div>
 
-    // 파라미터가 없으면 표시할 기본값 설정
+  <script>
+    // URL 쿼리 파라미터 값 가져오기
+    const params = new URLSearchParams(window.location.search);
+    
+    // 기본값 설정 (파라미터가 없을 때 표시됨)
     const userData = {
-      name: params.get('name') || '김지은',
-      org: params.get('org') || '평택시청',
+      name: params.get('name') || '김 지 은',
       role: params.get('role') || '기획예산과 주무관',
+      address: params.get('address') || '경기도 평택시 경기대로 245(비전동)',
+      office: params.get('office') || '031-8024-0000',
+      fax: params.get('fax') || '031-8024-0001',
       tel: params.get('tel') || '010-0000-0000',
-      email: params.get('email') || 'example@pyeongtaek.go.kr'
+      email: params.get('email') || 'jieun@korea.kr'
     };
 
-    // 2. 화면 텍스트 실시간 반영
-    document.getElementById('cardOrg').textContent = userData.org;
+    // 텍스트 반영
     document.getElementById('cardName').textContent = userData.name;
     document.getElementById('cardRole').textContent = userData.role;
-    document.getElementById('textTel').textContent = userData.tel;
-    document.getElementById('textEmail').textContent = userData.email;
+    document.getElementById('cardAddress').textContent = userData.address;
+    document.getElementById('cardOffice').textContent = userData.office;
+    document.getElementById('cardFax').textContent = userData.fax;
+    document.getElementById('cardTel').textContent = userData.tel;
+    document.getElementById('cardEmail').textContent = userData.email;
     document.getElementById('linkCall').href = `tel:${userData.tel.replace(/[^0-9]/g, '')}`;
 
-    // 3. 현재 접속 중인 전체 URL 주소를 가져와서 QR 코드 이미지 소스로 삽입
+    // QR 코드 생성
     const currentUrl = encodeURIComponent(window.location.href);
     document.getElementById('qrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${currentUrl}`;
 
-    // 4. 동적 vCard 파일 생성 및 저장
+    // vCard 생성
     function saveContact() {
       const vcard = 
 `BEGIN:VCARD
 VERSION:3.0
-N:${userData.name};;;;
-FN:${userData.name}
-ORG:${userData.org}
+N:${userData.name.replace(/ /g, '')};;;;
+FN:${userData.name.replace(/ /g, '')}
+ORG:평택시청;
 TITLE:${userData.role}
+ADR;TYPE=WORK:;;${userData.address};;;;
+TEL;TYPE=WORK,VOICE:${userData.office}
+TEL;TYPE=WORK,FAX:${userData.fax}
 TEL;TYPE=CELL:${userData.tel}
 EMAIL:${userData.email}
 END:VCARD`;
@@ -161,7 +233,7 @@ END:VCARD`;
       const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const newLink = document.createElement('a');
-      newLink.download = `${userData.name}_명함.vcf`;
+      newLink.download = `${userData.name.replace(/ /g, '')}_명함.vcf`;
       newLink.href = url;
       newLink.click();
       URL.revokeObjectURL(url);
